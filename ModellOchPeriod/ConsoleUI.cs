@@ -21,7 +21,6 @@ public class ConsoleUI(SelectionService service)
             {
                 selectedModel = service.GetModels()
                     .Find(model => model.Id == modelid);
-
             }
 
             if (selectedModel == null)
@@ -31,5 +30,38 @@ public class ConsoleUI(SelectionService service)
         }
 
         Console.WriteLine($"Du har valt: {selectedModel.Name}");
+
+        Console.WriteLine("Ange startdatum (YYYY-MM-DD):");
+
+        bool validStartDate = DateOnly.TryParse
+            (
+
+            Console.ReadLine(), out DateOnly startDate
+
+            );
+
+        Console.WriteLine("Ange slutdatum (YYYY-MM-DD):");
+
+        bool validEndDate = DateOnly.TryParse
+            (
+
+            Console.ReadLine(), out DateOnly endDate
+
+            );
+
+        if (!validStartDate || !validEndDate)
+        {
+            Console.WriteLine("Ange giltiga datum i formatet YYYY-MM-DD.");
+            return;
+        }
+
+        string? error = service.ValidatePeriod(startDate, endDate);
+
+        if (error != null)
+        {
+            Console.WriteLine(error);
+            return;
+        }   
+
     }
 }

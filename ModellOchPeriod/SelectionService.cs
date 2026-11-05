@@ -14,7 +14,7 @@ public class SelectionService
         return models;
     }
 
-    public static string? ValidatePeriod(DateOnly startDate, DateOnly endDate)
+    public string? ValidatePeriod(DateOnly startDate, DateOnly endDate)
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Today);
 
