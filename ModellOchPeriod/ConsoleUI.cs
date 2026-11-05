@@ -31,37 +31,47 @@ public class ConsoleUI(SelectionService service)
 
         Console.WriteLine($"Du har valt: {selectedModel.Name}");
 
-        Console.WriteLine("Ange startdatum (YYYY-MM-DD):");
-
-        bool validStartDate = DateOnly.TryParse
-            (
-
-            Console.ReadLine(), out DateOnly startDate
-
-            );
-
-        Console.WriteLine("Ange slutdatum (YYYY-MM-DD):");
-
-        bool validEndDate = DateOnly.TryParse
-            (
-
-            Console.ReadLine(), out DateOnly endDate
-
-            );
-
-        if (!validStartDate || !validEndDate)
+        while (true)
         {
-            Console.WriteLine("Ange giltiga datum i formatet YYYY-MM-DD.");
-            return;
+
+            Console.WriteLine("Ange startdatum (YYYY-MM-DD):");
+
+            bool validStartDate = DateOnly.TryParse
+                (
+
+                Console.ReadLine(), out DateOnly startDate
+
+                );
+
+            Console.WriteLine("Ange slutdatum (YYYY-MM-DD):");
+
+            bool validEndDate = DateOnly.TryParse
+                (
+
+                Console.ReadLine(), out DateOnly endDate
+
+                );
+
+            if (!validStartDate || !validEndDate)
+            {
+                Console.WriteLine("Ange giltiga datum i formatet YYYY-MM-DD.");
+                continue;
+            }
+
+            string? error = service.ValidatePeriod(startDate, endDate);
+
+            if (error != null)
+            {
+                Console.WriteLine(error);
+                continue;
+            }
+
+            Console.WriteLine($"\nMoodel: {selectedModel.Name}");
+            Console.WriteLine($"Period: {startDate:yyyy-MM-dd} - {endDate:yyyy-MM-dd}");
+            Console.WriteLine("Ingen bokning har gjorts.");
+            break;
+
         }
-
-        string? error = service.ValidatePeriod(startDate, endDate);
-
-        if (error != null)
-        {
-            Console.WriteLine(error);
-            return;
-        }   
 
     }
 }
