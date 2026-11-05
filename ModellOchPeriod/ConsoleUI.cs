@@ -66,7 +66,7 @@ public class ConsoleUI(SelectionService service)
                 continue;
             }
 
-            Console.WriteLine($"\nMoodel: {selectedModel.Name}");
+            Console.WriteLine($"\nModell: {selectedModel.Name}");
             Console.WriteLine($"Period: {startDate:yyyy-MM-dd} - {endDate:yyyy-MM-dd}");
             Console.WriteLine("Ingen bokning har gjorts.");
             break;
