@@ -17,6 +17,7 @@ public class SelectionService
     public static string? ValidatePeriod(DateOnly startDate, DateOnly endDate)
     {
         DateOnly today = DateOnly.FromDateTime(DateTime.Today);
+
         if (startDate < today)
         {
             return "Startdatumet kan inte vara tidigare än dagens datum.";
