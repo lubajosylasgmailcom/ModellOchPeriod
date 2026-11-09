@@ -1,16 +1,27 @@
 @startuml Aktivitetsdiagram
+|System|
 start
 
 :Visa utrustningsmodeller;
-:Kunden väljer en modell;
-:Behåll vald modell;
-:Kunden anger startdatum och slutdatum;
 
-while (Startdatum före idag eller\nslutdatum före startdatum?) is (Ja)
-  :Visa datumfelet;
-  :Kunden rättar datumen;
+|Kund|
+:Välj en utrustningsmodell;
+:Ange startdatum och slutdatum;
+
+|System|
+:Kontrollera perioden;
+
+while (Startdatum före dagens datum\neller slutdatum före startdatum?) is (Ja)
+  :Visa felmeddelande\nmed vilket datumfel som finns;
+
+  |Kund|
+  :Rätta startdatum och slutdatum;
+
+  |System|
+  :Kontrollera perioden på nytt;
 endwhile (Nej)
 
-:Visa vald modell och period;
+:Visa sammanfattning av\nvald modell och giltig period;
+
 stop
 @enduml
