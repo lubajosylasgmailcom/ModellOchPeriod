@@ -1,0 +1,16 @@
+@startuml Aktivitetsdiagram
+start
+
+:Visa utrustningsmodeller;
+:Kunden väljer en modell;
+:Behåll vald modell;
+:Kunden anger startdatum och slutdatum;
+
+while (Startdatum före idag eller\nslutdatum före startdatum?) is (Ja)
+  :Visa datumfelet;
+  :Kunden rättar datumen;
+endwhile (Nej)
+
+:Visa vald modell och period;
+stop
+@enduml

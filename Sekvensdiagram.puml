@@ -1,0 +1,26 @@
+@startuml Sekvensdiagram
+hide footbox
+actor Kund
+participant "console: ConsoleUI" as console
+participant "service: SelectionService" as service
+
+console -> service: GetModels()
+service --> console: Lista med EquipmentModel
+console --> Kund: Visa utrustningsmodeller
+
+Kund -> console: Välj modell
+console -> console: Behåll vald modell
+
+loop Ange datum tills perioden är giltig
+  Kund -> console: Ange startdatum och slutdatum
+  console -> service: ValidatePeriod(startDate, endDate)
+
+  alt Startdatum före idag eller slutdatum före startdatum
+    service --> console: Felmeddelande
+    console --> Kund: Visa felet och be om nya datum
+  else Giltig period
+    service --> console: Giltig
+    console --> Kund: Visa vald modell och period
+  end
+end
+@enduml
