@@ -4,9 +4,9 @@ public class SelectionService
 {
     private readonly List<EquipmentModel> models =
     [
-        new EquipmentModel(1, "Borrmaskin"),
-        new EquipmentModel(2, "Slipmaskin"),
-        new EquipmentModel(3, "Högtrycksmaskin")
+        new EquipmentModel(Guid.NewGuid(), "Borrmaskin"),
+        new EquipmentModel(Guid.NewGuid(), "Slipmaskin"),
+        new EquipmentModel(Guid.NewGuid(), "Högtrycksmaskin")
     ];
 
     public List<EquipmentModel> GetModels()

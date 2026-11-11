@@ -6,9 +6,11 @@ public class ConsoleUI(SelectionService service)
     {
         Console.WriteLine("Välj en utrustningsmodell:");
 
-        foreach (EquipmentModel model in service.GetModels())
+        List<EquipmentModel> models = service.GetModels();
+
+        for (int i = 0; i < models.Count; i++)
         {
-            Console.WriteLine($"{model.Id}. {model.Name}");
+            Console.WriteLine($"{i + 1}. {models[i].Name}");
         }
 
         EquipmentModel? selectedModel = null;
@@ -17,16 +19,20 @@ public class ConsoleUI(SelectionService service)
         {
             Console.WriteLine("Ange modellens nummer:");
 
-            if (int.TryParse(Console.ReadLine(), out int modelid))
-            {
-                selectedModel = service.GetModels()
-                    .Find(model => model.Id == modelid);
-            }
+            if (int.TryParse(Console.ReadLine(), out int modelNumber)
 
-            if (selectedModel == null)
+                && modelNumber >= 1
+
+                && modelNumber <= models.Count)
+            {
+                selectedModel = models[modelNumber - 1];
+            }
+            else
             {
                 Console.WriteLine("Ogiltigt modellnummer. Försök igen.");
             }
+
+
         }
 
         Console.WriteLine($"Du har valt: {selectedModel.Name}");
